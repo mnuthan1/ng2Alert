@@ -1,0 +1,10 @@
+<!--
+    The alert component template contains the html for displaying alert messages at the top of the page
+-->
+
+<div *ngFor="let alert of alerts;let i = index" class="{{ getTypeClass(alert) }} alert-dismissable alert {{ getPositionClass(alert)}}" 
+    [style.top.px]="getTopPosition(alert,i)"  [style.bottom.px]="getBottomPosition(alert,i)">
+    <i class="material-icons md-18">{{getIconType(alert)}}</i>
+    {{alert.message}} <strong class="float-right" *ngIf="alert.ttl>0"> {{alert.ttl}} </strong>
+    <a class="close" (click)="removeAlert(alert)">&times;</a>
+</div>

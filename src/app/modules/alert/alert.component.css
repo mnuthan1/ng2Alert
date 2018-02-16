@@ -1,0 +1,34 @@
+.alert {
+    position: fixed;
+    z-index:999;
+    margin: auto;
+}
+.alert-top-left {
+    top: 10px;
+    left: 10px; 
+}
+.alert-top-right {
+    top: 10px;
+    right: 10px;
+}
+.alert-bottom-left {
+    bottom: 10px;
+    left: 10px; 
+}
+.alert-bottom-right {
+    bottom: 10px;
+    right: 10px; 
+}
+.alert-default .alert {
+    margin-left: auto;
+    margin-right: auto;
+    top: 10px;
+    right: 10px;
+    left: 10px
+}
+
+/* Rules for icon sizes: */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; } /* Default */
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
