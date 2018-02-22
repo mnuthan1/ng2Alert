@@ -1,27 +1,30 @@
-# Ng2Alert
+## ng2-bootstrap-alert
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.8.
+A simple Angular 2 library to display alert messages
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Usage
+- install library  `npm i ng2-bootstrap-alert --save`
+- Install peer dependencies
+    -- bootstrap  `npm i bootstrap --save`
+    -- angular material icons  `npm i material-design-icons --save`
+- update `.angular-cli.json` to include following css under `Styles` array
+    -- `../node_modules/material-design-icons/iconfont/material-icons.css`
+    -- `../node_modules/bootstrap/dist/css/bootstrap.min.css`
+- update your app.module.ts  with `import {AlertModule} from 'ng2-bootstrap-alert';`
+- add `AlertModule` in `imports` array
+- add `<alert></alert>` to your root html 
+- start using AlertService   `this.alertService.error("message",ttl,Position);`
+    | Method | Description |
+    | ------------- | ------------- |
+    | error  | to display error message  |
+    | warn  | to display warning message  |
+    | success | to display success message |
+    | info | to display info message|
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- All the methods takes 3 parameters
+    | Param | Required | Options | Default |
+    | ------------- | ------------- |
+    | message  | Yes |  |  |
+    | ttl  | No  |  integer |0 - user has to close the message manually |
+    | Poistion | No | PositionType.TOP_LEFT,PositionType.TOP_RIGHT,PositionType.BOTTOM_LEFT, PositionType.BOTOM_RIGHT,PositionType.DEFAULT |PositionType.DEFAULT|

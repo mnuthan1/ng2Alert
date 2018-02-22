@@ -7,12 +7,15 @@
 /*
 */
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/delay';
-import { take, map } from 'rxjs/operators';
 import { Alert, AlertType, PositionType } from './alert';
 import { AlertService } from './alert.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/delay';
+
 @Component({
     moduleId: module.id,
     selector: 'alert',
@@ -20,13 +23,12 @@ import { AlertService } from './alert.service';
     styleUrls: ['./alert.component.css']
 })
 
-export class AlertComponent {
+export class AlertComponent implements OnInit {
     alerts: Alert[] = [];
 
     constructor(private alertService: AlertService) { }
 
     ngOnInit() {
-        console.log("component init");
         this.alertService.getAlert().subscribe((alert: Alert) => {
             if (!alert) {
                 // clear alerts when an empty alert is received
@@ -34,18 +36,17 @@ export class AlertComponent {
                 return;
             }
             // add alert to array
-            console.log(alert);
             this.alerts.push(alert);
             // if ttl is specified then create delay observable
             if (alert.ttl > 0) {
-                let delayedObservable = Observable.of(alert).delay(alert.ttl * 1000);
+                const delayedObservable = Observable.of(alert).delay(alert.ttl * 1000);
                 this.updatettl(alert);
                 delayedObservable.subscribe(data => this.removeAlert(data));
             }
         });
     }
 
-    
+   
     removeAlert(alert: Alert) {
         this.alerts = this.alerts.filter(x => x !== alert);
     }
@@ -87,13 +88,13 @@ export class AlertComponent {
                 return 'alert-default';
         }
     }
-    
+   
     getTopPosition(alert: Alert, index: number) {
         switch (alert.position) {
             case PositionType.TOP_LEFT:
             case PositionType.TOP_RIGHT:
             case PositionType.DEFAULT:
-                return this.alerts.filter((x, i) => x.position == alert.position && i < index).length * 55;
+                return this.alerts.filter((x, i) => x.position === alert.position && i < index).length * 55;
             default:
                 return;
         }
@@ -103,12 +104,12 @@ export class AlertComponent {
         switch (alert.position) {
             case PositionType.BOTOM_RIGHT:
             case PositionType.BOTTOM_LEFT:
-                return this.alerts.filter((x, i) => x.position == alert.position && i < index).length * (55) + 10;
+                return this.alerts.filter((x, i) => x.position === alert.position && i < index).length * (55) + 10;
             default:
                 return;
         }
     }
-    
+   
     getIconType(alert: Alert) {
         if (!alert) {
             return;
@@ -125,7 +126,7 @@ export class AlertComponent {
                 return 'warning';
         }
     }
-    
+   
     updatettl(alert: Alert) {
         Observable
             .interval(1000)
@@ -134,5 +135,5 @@ export class AlertComponent {
             }) // to start from 1 instead of 0
             .take(alert.ttl)
             .subscribe();
-    };
+    }
 }

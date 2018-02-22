@@ -1,12 +1,11 @@
-import {Observable} from 'rxjs/Rx';
 
 export class Alert {
     type: AlertType;
     message: string;
-    ttl:number = 0;
-    position:PositionType;
+    ttl = 0;
+    position: PositionType;
 }
- 
+
 export enum AlertType {
     Success,
     Error,
