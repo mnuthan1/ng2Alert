@@ -35,5 +35,4 @@ StackEdit stores your files in your browser, which means all your files are auto
 |------------|------------|-----------|----------|-------------|
 |message     |String      |Yes        |          |Message to display|
 |ttl         | int        |No         | 0        | time in sec to display the message |
-|info            |dispalys info           |`this.alertService.info("message")`   |
-|success         |dispalys success        |`this.alertService.success("message") |
+|position    |PositionType.TOP_LEFT,PositionType.TOP_RIGHT,PositionType.BOTTOM_LEFT, PositionType.BOTOM_RIGHT,PositionType.DEFAULT|No |  PositionType.DEFAULT | position of the message |
